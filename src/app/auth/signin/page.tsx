@@ -7,30 +7,39 @@ import React from "react";
 import { FaGithub } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
+// Import shadcn/ui components
+import { Button } from "@/components/ui/button"; // Assuming your shadcn/ui components are in this path
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
 export default function SignInPage() {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4">
-        <h1 className="text-4xl font-bold mb-6">Sign In</h1>
-        <p className="text-lg mb-8">Choose how you want to sign in:</p>
-        
-        <button
+    <div className="flex items-center justify-center min-h-screen p-4">
+      <Card className="w-full max-w-md">
+        <CardHeader className="space-y-1 text-center">
+          <CardTitle className="text-3xl font-bold">Sign In</CardTitle>
+          <CardDescription className="text-lg">Choose how you want to sign in:</CardDescription>
+        </CardHeader>
+        <CardContent className="grid gap-4">
+          <Button
+            variant="outline"
+            className="w-full py-6 flex items-center justify-center gap-3 text-lg bg-black text-white hover:bg-gray-900 hover:text-white transition-colors"
             onClick={() => signIn("github", { callbackUrl })}
-            className="px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition-colors mb-4 flex gap-3"
-        >
-            <FaGithub className="text-xl" />
+          >
+            <FaGithub className="h-6 w-6" />
             <span>Sign in with GitHub</span>
-        </button>
-
-        <button
+          </Button>
+          {/* <Button
+            className="w-full py-6 flex items-center justify-center gap-3 text-lg"
             onClick={() => signIn("email", { callbackUrl })}
-            className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors mb-4 flex gap-3"
-        >
-            <MdEmail className="text-xl" />
+          >
+            <MdEmail className="h-6 w-6" />
             <span>Sign in with Email</span>
-        </button>
+          </Button> */}
+        </CardContent>
+      </Card>
     </div>
-  )
+  );
 }
